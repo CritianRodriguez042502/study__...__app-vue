@@ -57,7 +57,7 @@ function changeDomain() {
 }
 
 .home-text {
-  color: gray;
+  color: rgb(203, 203, 203);
   cursor: pointer;
   text-decoration: underline;
   font-weight: 900;

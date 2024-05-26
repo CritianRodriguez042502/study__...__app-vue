@@ -3,13 +3,11 @@ import { ref, computed } from "vue";
 
 // Import Views
 import Home from "../views/home.vue";
-import About from "../views/about.vue";
 import NotFound from "../components/errors/not-found.vue";
 
 const routes = {
   "/": Home,
   "/home": Home,
-  "/about": About,
 };
 
 const currentPath = ref(window.location.hash);
