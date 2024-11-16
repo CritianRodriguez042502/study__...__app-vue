@@ -1,65 +1,71 @@
 <script setup>
-import { ref } from "vue";
-import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
+import { ref } from 'vue';
 
-const executionClick = ref(false);
+const newInfo = ref('Hello');
+const counter = ref(0);
 
-function changeDomain() {
-  if (!executionClick.value) {
-    executionClick.value = true;
+const names = [{ name: "Cristian", age: 23 }, { name: "Juan", age: 24 }, { name: "Pedro", age: 25 }, { name: "Camilo", age: 17 }];
 
-    toast.warning("I'm Cristian . . .", {
-      position: "top-right",
-    });
-
-    toast.success("Redirecting . . .", {
-      position: "top-left",
-    });
-
-    toast.error("Hello world :)", {
-      position: "top-center",
-    });
-
-    toast.warning("I'm Cristian . . .", {
-      position: "bottom-right",
-    });
-
-    toast.success("Redirecting . . .", {
-      position: "bottom-left",
-    });
-
-    toast.error("Hello world :)", {
-      position: "bottom-center",
-    });
-
-    window.setTimeout(() => {
-      window.location.href = "https://web-portfolio-z9ym.onrender.com";
-    }, 3000);
+function changeText() {
+  if (newInfo.value === "Hello") {
+    newInfo.value = "Hello_1"
+  } else {
+    newInfo.value = "Hello_" + `${parseInt(newInfo.value.split("_")[1]) + 1}`
   }
-  return;
 }
+
+
+const increment = () => {
+  counter.value = counter.value + 1;
+}
+
+
+const conditional = ref(true);
+const otherConditional = ref(false);
+
+function changeInfo() {
+  conditional.value = !conditional.value;
+}
+
 </script>
 
 <template>
-  <main class="container">
-    <h1 class="home-text" @click="changeDomain()">Click here</h1>
-  </main>
+  <h1 v-text="newInfo" @click="changeText" :id="$style.title"></h1>
+  <p>Counter: {{ counter }}</p>
+  <button @click="increment">Increment</button>
+  <p :class="$style.fontWeight"> Cero</p>
+
+  <p v-if="conditional"> this is awesome</p>
+  <p v-else> Oh no!</p>
+  <button @click="changeInfo"> Toggle </button>
+
+
+  <h2 v-show="otherConditional"> Informacion </h2>
+
+  <div v-for="user of names"> 
+    <h1 :class="$style.smallSize" v-show="user.age > 18"> {{ user.name }}</h1>
+  </div>
 </template>
 
-<style scoped>
-.container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+<style module>
+#title {
+  color: red;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.home-text {
-  color: rgb(203, 203, 203);
-  cursor: pointer;
-  text-decoration: underline;
-  font-weight: 900;
+.fontSize {
+  font-size: 60px;
+}
+
+.smallSize {
+  font-size: 10px
+}
+
+.greenColor {
+  color: green;
+}
+
+.fontWeight {
+  font-weight: 100
 }
 </style>

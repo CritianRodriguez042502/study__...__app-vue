@@ -7,7 +7,6 @@ import NotFound from "../components/errors/not-found.vue";
 
 const routes = {
   "/": Home,
-  "/home": Home,
 };
 
 const currentPath = ref(window.location.hash);
